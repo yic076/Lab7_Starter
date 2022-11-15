@@ -1,3 +1,4 @@
+
 // sw.js - This file needs to be in the root of the directory to work,
 //         so do not move it next to the other scripts
 
@@ -41,12 +42,12 @@ self.addEventListener('fetch', function (event) {
   // https://developer.chrome.com/docs/workbox/caching-strategies-overview/
   /*******************************/
   // B7. TODO - Respond to the event by opening the cache using the name we gave
-  //            above (CACHE_NAME)
+  //            above (CACHE_NAME)/*
   event.respondWith(caches.open(CACHE_NAME).then((cache) => {
-    return cache.match(event.request.url).then((cachedResponse) => {
+    return cache.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
         return cachedResponse;
-      } else{
+      } 
   // B8. TODO - If the request is in the cache, return with the cached version.
   //            Otherwise fetch the resource, add it to the cache, and return
   //            network response.
@@ -54,7 +55,7 @@ self.addEventListener('fetch', function (event) {
           cache.put(event.request, fetchedResponse.clone());
           return fetchedResponse;
         }) 
-      }
+      
     })
   }))
-});
+}); 
